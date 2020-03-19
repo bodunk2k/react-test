@@ -2,15 +2,11 @@ body {
   font-family: "Open Sans", sans-serif;
 }
 
-h5 {
+.card-title {
 font-family: "Lobster", cursive;
 }
 
-.card-img-overlay h5 {
+.card-img-overlay .card-title {
 color: white;
-background-color: rgba(0, 0, 0, 0.5);
-}
-.card-title h5 {
-  color: white;
 background-color: rgba(0, 0, 0, 0.5);
 }
