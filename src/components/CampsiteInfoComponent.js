@@ -22,14 +22,35 @@ class CampsiteInfo extends Component {
                         </CardBody>
                     </Card>       
                 </div>
-            );
+            )
         }
 
-        return <div />;
+        return <div />
+    }
+
+    renderComments(comment2){
+        if (comment2) {
+            return (
+                <div className="col-md-5 m-1" >
+                    <h4>Comments</h4>
+                    {comment2.map(comment => 
+                    <div key={comment.id}>{comment.text}<br></br> --{comment.author} ,
+                     {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))} 
+                     <br></br><br></br>
+                     </div>   )}
+                    
+                </div>
+            )
+        }
+
+        return <div />
     }
 
     render() {
-        const CampsiteInfo  =  this.newMethod() ;
+        const CampsiteInfo  =  this.props.campsite ;
+        
+                                
+        
         if (CampsiteInfo === null || CampsiteInfo === undefined){
 
             return(
@@ -42,15 +63,18 @@ class CampsiteInfo extends Component {
             return(
                 <div className="Row">
                      { this.renderCampsite(CampsiteInfo)};
+                     { this.renderComments(CampsiteInfo.comments)};
                 </div>
+                
             )
 
         }
+
+
     }
 
 
-    newMethod() {
-        return this.props.campsite;
-    }
+
+
 }
 export default CampsiteInfo;
