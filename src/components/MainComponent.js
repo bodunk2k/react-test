@@ -9,7 +9,7 @@ import { actions } from 'react-redux-form';
 import Contact from './ContactComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import {connect} from 'react-redux';
-import { addComment, fetchCampsites, fetchComments, fetchPromotions } from '../redux/ActionCreators';
+import { addComment, fetchCampsites, fetchComments, fetchPromotions, addPromotions } from '../redux/ActionCreators';
 
 
 
