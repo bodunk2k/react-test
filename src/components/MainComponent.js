@@ -9,7 +9,7 @@ import { actions } from 'react-redux-form';
 import Contact from './ContactComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import {connect} from 'react-redux';
-import { addComment, fetchCampsites, fetchComments, fetchPromotions, addPromotions } from '../redux/ActionCreators';
+import { postComment, fetchCampsites, fetchComments, fetchPromotions, addPromotions } from '../redux/ActionCreators';
 
 
 
@@ -23,7 +23,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-      addComment: (campsiteId, rating, author, text) => (addComment(campsiteId,rating,author,text)),
+      postComment: (campsiteId, rating, author, text) => (postComment(campsiteId,rating,author,text)),
       fetchCampsites: () => (fetchCampsites()),
       resetFeedbackForm: () => (actions.reset('feedbackForm')),
       fetchComments: () => (fetchComments()),
@@ -63,7 +63,7 @@ class Main extends Component {
                 comments={this.props.comments.comments.filter(comment => comment.campsiteId === +match.params.campsiteId)}
                /* partner={this.props.partners.filter(partner => partner.id === +match.params.partner.id)[0]} */
                 commentsErrMess={this.props.comments.errMess}
-               addComment={this.props.addComment}
+               postComment={this.props.postComment}
             />
         );
     };
