@@ -1,14 +1,14 @@
-import React, {Component} from 'react';
-import {  Breadcrumb, BreadcrumbItem, Button,  Label,  Col, Row } from 'reactstrap';
+import React, { Component } from 'react';
+import { Breadcrumb, BreadcrumbItem,
+    Button, Label, Col, Row } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { Control, Form, Errors, actions } from 'react-redux-form';
 
-const required = val => val && val.lenght;
-const maxLength= len => val => !val || (val.length <=len);
-const minLength = len => val => val && (val.length >=len);
+const required = val => val && val.length;
+const maxLength = len => val => !val || (val.length <= len);
+const minLength = len => val => val && (val.length >= len);
 const isNumber = val => !isNaN(+val);
 const validEmail = val => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
-
 
 class Contact extends Component {
 
@@ -23,7 +23,7 @@ class Contact extends Component {
             agree: false,
             contactType: 'By Phone',
             feedback: '',
-            touched : {
+            touched: {
                 firstName: false,
                 lastName: false,
                 phoneNum: false,
@@ -31,22 +31,16 @@ class Contact extends Component {
             }
         };
 
-
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-
-
-    
-
     handleSubmit(values) {
-        console.log("Current state is: " + JSON.stringify(values));
-        alert("Current state is: " + JSON.stringify(values));
+        this.props.postFeedback(values);
         this.props.resetFeedbackForm();
     }
+
     render() {
 
-        
         return (
             <div className="container">
                 <div className="row">
@@ -70,10 +64,11 @@ class Contact extends Component {
                         </address>
                     </div>
                     <div className="col">
-                        <a role="button" className="btn btn-link" href="tel:+12065551234"><i className="fa fa-phone"></i> 1-206-555-1234</a><br />
-                        <a role="button" className="btn btn-link" href="mailto:fakeemail@fakeemail.co"><i className="fa fa-envelope-o"></i> campsites@nucamp.co</a>
+                        <a role="button" className="btn btn-link" href="tel:+12065551234"><i className="fa fa-phone" /> 1-206-555-1234</a><br />
+                        <a role="button" className="btn btn-link" href="mailto:fakeemail@fakeemail.co"><i className="fa fa-envelope-o" /> campsites@nucamp.co</a>
                     </div>
                 </div>
+
                 <div className="row row-content">
                    <div className="col-12">
                       <h2>Send us your Feedback</h2>
@@ -88,7 +83,7 @@ class Contact extends Component {
                                         placeholder="First Name"
                                         className="form-control"
                                         validators={{
-                                            required,
+                                            required, 
                                             minLength: minLength(2),
                                             maxLength: maxLength(15)
                                         }}
@@ -129,7 +124,7 @@ class Contact extends Component {
                                             maxLength: 'Must be 15 characters or less'
                                         }}
                                     />
-                                </Col>                        
+                                </Col>
                             </Row>
                             <Row className="form-group">
                                 <Label htmlFor="phoneNum" md={2}>Phone</Label>
@@ -156,7 +151,6 @@ class Contact extends Component {
                                             isNumber: 'Must be a number'
                                         }}
                                     />
-
                                 </Col>
                             </Row>
                             <Row className="form-group">
@@ -177,8 +171,7 @@ class Contact extends Component {
                                         component="div"
                                         messages={{
                                             required: 'Required',
-                                            validEmail: 'Invalid email address',
-                                            isNumber: 'Must be a number'
+                                            validEmail: 'Invalid email address'
                                         }}
                                     />
                                 </Col>
@@ -187,7 +180,8 @@ class Contact extends Component {
                                 <Col md={{size: 4, offset: 2}}>
                                     <div className="form-check">
                                         <Label check>
-                                            <Control.checkbox model=".agree"
+                                            <Control.checkbox
+                                                model=".agree"
                                                 name="agree"
                                                 className="form-check-input"
                                             /> {' '}
@@ -208,8 +202,8 @@ class Contact extends Component {
                                 <Col md={10}>
                                     <Control.textarea model=".feedback" id="feedback" name="feedback"
                                         rows="12"
-                                        className="form-control">
-                                    </Control.textarea>
+                                        className="form-control"
+                                    />
                                 </Col>
                             </Row>
                             <Row className="form-group">
